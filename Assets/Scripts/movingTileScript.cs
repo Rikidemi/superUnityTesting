@@ -35,25 +35,27 @@ public class movingTileScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startPos = transform.position.x;
+        
         if (GoingTowards == directions.Left)
         {
-            lastPos = startPos - distance;
+            lastPos = transform.position.x;
+            startPos = lastPos - distance;
         }
-        else { lastPos = startPos + distance; }
+        else {
+            startPos = transform.position.x;
+            lastPos = startPos + distance;
+        }
         
         completed = false;
     }
 
     // Update is called once per frame
     void Update()
-    {
-
+    { 
         currPosition = transform.position.x;
 
         if (!completed) d = actualDirection.Right;
         if (completed) d = actualDirection.Left;
-        if (GoingTowards == directions.Left)
         if (currPosition <= startPos) d = actualDirection.CentreLx;
         if (currPosition >= lastPos) d = actualDirection.CentreDx;
 
